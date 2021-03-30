@@ -1,0 +1,59 @@
+<?php if($error){ ?>
+    <div class="alert alert-danger text-center">
+        <?php echo $error; ?>
+    </div>
+<?php } ?>
+
+<h3>Usage History</h3>
+<style>
+.alert-success{
+    display:none;
+}
+</style>
+<?php if($usage_history){ ?>
+
+    <table class="checker table table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <th>Period</th>
+            <th class="text-center">Download</th>
+            <th class="text-center">Upload</th>
+            <th class="text-center">Total Bandwidth</th>
+            <th class="text-center">Disk Quota</th>
+            <th class="text-center">Inode Quota</th>
+        </tr>
+        </thead>
+        <?php foreach($usage_history as $item){ ?>
+            <tr>
+                <?php
+                    $year = $item['year'];
+                    $month = $item['month'];
+                    $history_date = $year.'-'.$month.'-'."01";
+                ?>
+                <td><strong><?=  date('M,Y ', strtotime($history_date)) ?></strong></td>
+                <td class="text-center"> <?= number_format($item['bw_in']/1024,3)?> GB</td>
+                <td class="text-center"> <?= number_format($item['bw_out']/1024,3)?> GB</td>
+                <td class="text-center"><?= number_format(($item['bw_in']+$item['bw_out'])/1024,3)?> GB</td>
+                <td class="text-center">
+                    <?php if($item['quota_usage'])
+                    {
+                        echo number_format($item['quota_usage']/1024,2) .' GB / '. number_format($item['quota_limit']/1024,0) .' GB';
+                    } else {
+                        echo '-';
+                    } ?>
+                </td>
+                <td class="text-center">
+                    <?php if($item['inode_usage']){
+                        echo $item['inode_usage'] . ' / ' . $item['inode_limit'];
+                    } else {
+                        echo ' - ';
+                    } ?>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+<?php } else {?>
+    <div class="alert alert-info">
+        Server usage history is not available yet.
+    </div>
+<?php } ?>

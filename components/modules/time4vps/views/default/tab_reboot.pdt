@@ -1,0 +1,33 @@
+<style>
+.alert-success{
+    display:none;
+}
+</style>
+<?php if($error){ ?>
+    <div class="alert alert-danger text-center">
+        <?php echo $error; ?>
+    </div>
+<?php } ?>
+
+<h3>Server Reboot</h3>
+<?php if (isset($last_result['completed']) && $last_result['completed']) { ?>
+    <p>Your Server was restarted at <strong><?php echo date('d/M/Y h:i:s', strtotime($last_result['completed']))?></strong>:</p>
+    <pre><?php echo $last_result['results']; ?></pre>
+    <hr />
+<?php } ?>
+
+<div class="text-center margin-bottom">
+    <?php
+    $this->Form->create();
+    ?>
+        <div class="form-group">
+            <div class="block text-center">
+                <input type="hidden" name="redirect" value="{$currentpagelinkback}" />
+                <input type="hidden" name="confirm" value="1" />
+                <button class="btn btn-primary" type="submit"><i class="fa fa-sync-alt"></i> Reboot</button>
+            </div>
+        </div>
+    <?php
+    $this->Form->end();
+    ?>
+</div>

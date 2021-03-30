@@ -1,0 +1,50 @@
+<style>
+.alert-success{
+    display:none;
+}
+</style>
+<div id="emergency_console">
+    <?php if($error){ ?>
+        <div class="alert alert-danger text-center">
+            <?php echo $error; ?>
+        </div>
+    <?php } ?>
+
+    <h3>Reinstall Server</h3>
+
+    <?php if ($last_result['completed']) { ?>
+        <p>Your server was reinstalled at <strong><?php echo date('d/M/Y h:i:s', strtotime($last_result['completed'])) ?></strong>:</p>
+        <pre><?php echo $last_result['results']; ?></pre>
+        <hr />
+    <?php } ?>
+
+    <div class="text-center margin-bottom">
+        <?php
+        $this->Form->create();
+        ?>
+            <div class="form-group">
+                <label for="os" class="col-sm-2 control-label">Select OS</label>
+                <div class="col-sm-10">
+                    <select id="os" name="os" class="form-control">
+                        <?php foreach($oses as $os){ ?>
+                            <option value="<?=$os['os']?>"><?=$os['title']?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12 text-center">
+                    <label for="confirm" class="control-label">
+                        <input type="checkbox" name="confirm" id="confirm" />
+                        I understand, that reinstalling OS will <strong class="text-danger">ERASE ALL DATA STORED ON SERVER</strong>.
+                    </label>
+                </div>
+            </div>
+            <div class="block text-center">
+                <button class="btn btn-danger" type="submit">Reinstall Server</button>
+            </div>
+        <?php
+        $this->Form->end();
+        ?>
+    </div>
+</div>

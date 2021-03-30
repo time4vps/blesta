@@ -1,0 +1,22 @@
+    <div class="table-responsive">
+        <table class="table table-curved table-striped">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-share fa-flip-vertical"></i></th>
+                    <th><?php $this->_('time4vps.service_info.hostname');?></th>
+                    <th><?php $this->_('time4vps.service_info.os');?></th>
+                    <th><?php $this->_('time4vps.service_info.mainpv4');?></th>
+                    <th><?php $this->_('time4vps.service_info.password');?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td><?=isset($remote_service['domain'])?$remote_service['domain']:'-'?></td>
+                    <td><?=isset($remote_server['os'])?$remote_server['os']:'-'?></td>
+                    <td><?=isset($remote_server['ip'])?$remote_server['ip']:'-'?></td>
+                    <td><?=isset($remote_service['password'])?$remote_service['password']:'-'?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

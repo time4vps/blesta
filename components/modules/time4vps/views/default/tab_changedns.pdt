@@ -1,0 +1,45 @@
+<style>
+.dns-input{
+   display:inline-flex;
+}
+.dns-input label{
+    margin-top:10px;
+}
+.alert-success{
+    display:none;
+}
+</style>
+<div id="change_dns">
+    <?php if($error){ ?>
+        <div class="alert alert-danger text-center">
+            <?php echo $error; ?>
+        </div>
+    <?php } ?>
+
+    <h3>Change DNS</h3>
+
+    <div class="text-center margin-bottom">
+        <?php
+        $this->Form->create();
+        ?>
+            <div class="form-group">
+
+                <div class="col-sm-10 dns-input">
+                    <label for="dns1" class="col-sm-2 control-label">DNS Server 1</label>
+                    <input type="text" name="ns1" class="form-control" id="dns1" placeholder="IPv4 Address" required pattern="<?=$ippattern?>" value="<?php isset($details['dns_servers'][0])? $details['dns_servers'][0]:'' ?>" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10" style="display:inline-flex;">
+                     <label for="dns2" class="col-sm-2 control-label" style="margin-top:10px;">DNS Server 2</label>
+                    <input type="text" name="ns2" class="form-control" id="dns2" placeholder="IPv4 Address" pattern="<?=$ippattern?>" value="<?php isset($details['dns_servers'][1])? $details['dns_servers'][1]:'' ?>" />
+                </div>
+            </div>
+            <div class="block text-center">
+                <button class="btn btn-primary" type="submit">Set DNS Servers</button>
+            </div>
+        <?php
+        $this->Form->end();
+        ?>
+    </div>
+</div>

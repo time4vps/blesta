@@ -1,0 +1,43 @@
+<style>
+.hostname-input{
+   display:inline-flex;
+   margin-top:20px;
+}
+.hostname-input label{
+    margin-top:9px;
+}
+.alert-success{
+    display:none;
+}
+</style>
+<div id="change_hostname">
+    <?php if($error){ ?>
+        <div class="alert alert-danger text-center">
+            <?php echo $error; ?>
+        </div>
+    <?php } ?>
+
+    <h3>Change HostName</h3>
+
+    <div class="alert alert-info text-center">
+        <i class="fa fa-fw fa-info-circle"></i> Before changing hostname, make sure that hostname A record is pointed to your server IP address.
+    </div>
+
+    <div class="text-center margin-bottom">
+        <?php
+        $this->Form->create();
+        ?>
+            <div class="form-group hostname-input">
+                <label for="hostname" class="control-label">Hostname</label>
+                <div class="col-sm-10">
+                    <input type="text" id="hostname" name="hostname" class="form-control" placeholder="foo.bar.tld" />
+                </div>
+            </div>
+            <div class="block text-center">
+                <button class="btn btn-primary" type="submit"><i class="fa fa-edit"></i> Rename</button>
+            </div>
+        <?php
+        $this->Form->end();
+        ?>
+    </div>
+</div>

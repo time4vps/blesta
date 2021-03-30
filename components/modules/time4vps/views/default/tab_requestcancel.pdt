@@ -1,0 +1,33 @@
+
+<style>
+    .alert-success{
+        display:none;
+}
+</style>
+<div id="request_cancel">
+    <h4><?php $this->_('time4vps.tab_request_cancel.title');?></h4>
+    <h4>Requesting Cancellation for: <?php echo $service->package->name .' - ('. $service_fields->time4vps_domain. ')'?></h4>
+    <?php
+    $this->Form->create($this->base_uri . 'services/manage/' . $this->Html->ifSet($service_id) . '/tabCancelService/');
+    ?>
+    <div class="col-md-12">
+        <div class="form-group">
+            <?php
+            $this->Form->label($this->_('time4vps.tab_request_cancel.field_time4vps_reason', true), 'time4vps_reason');
+            $this->Form->fieldTextarea('time4vps_reason','', ['id' => 'time4vps_reason', 'class'=>'form-control']);
+            ?>
+        </div>
+        <div class="form-group">
+            <?php
+            $this->Form->label($this->_('time4vps.tab_request_cancel.field_time4vps_cancellation_type', true), 'cancellation_type');
+            $this->Form->fieldSelect('time4vps_cancellation_type', $options,'Immediate',['id' => 'cancellation_type', 'class'=>'form-control']);
+            ?>
+        </div>
+    </div>
+    <button class="btn btn-danger float-right">
+        <i class="fas fa-times"></i> <?php $this->_('time4vps.tab_request_cancel.field_reques_cancel_submit');?>
+    </button>
+    <?php
+    $this->Form->end();
+    ?>
+</div>

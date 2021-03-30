@@ -1,0 +1,102 @@
+        <?php
+        $this->Widget->clear();
+        $this->Widget->setLinkButtons([]);
+        $this->Widget->create($this->_('time4vps.edit_row.box_title', true));
+        ?>
+        <div class="inner">
+            <?php
+            $this->Form->create();
+            $this->Form->fieldHidden('account_count', $this->Html->ifSet($vars->account_count, 0));
+            ?>
+            <div class="title_row first">
+                <h3><?php $this->_('time4vps.edit_row.basic_title');?></h3>
+            </div>
+           <div class="pad">
+                <ul>
+                    <li>
+                        <?php
+                        $this->Form->label($this->_('time4vps.row_meta.server_name', true), 'server_name');
+                        $this->Form->fieldText('server_name', $this->Html->ifSet($vars->server_name));
+                        ?>
+                    </li>
+                    <li>
+                        <?php
+                        $this->Form->label($this->_('time4vps.row_meta.host_name', true), 'host_name');
+                        $this->Form->fieldText('host_name', $this->Html->ifSet($vars->host_name));
+                        ?>
+                    </li>
+                    <li>
+                        <?php
+                        $this->Form->label($this->_('time4vps.row_meta.user_name', true), 'user_name');
+                        $this->Form->fieldText('user_name', $this->Html->ifSet($vars->user_name));
+                        ?>
+                    </li>
+                    <li>
+                        <?php
+                        $this->Form->label($this->_('time4vps.row_meta.password', true), 'password');
+                        $this->Form->fieldPassword('password', ['value' => $this->Html->ifSet($vars->password)]);
+                        ?>
+                    </li>
+                    <li>
+                        <?php
+                        $this->Form->label($this->_('time4vps.row_meta.access_hash', true), 'access_hash');
+                        $this->Form->fieldtext('access_hash', $this->Html->ifSet($vars->access_hash));
+                        ?>
+                    </li>
+                    <li>
+                        <?php
+                        $this->Form->fieldCheckbox('use_ssl', 'true', $this->Html->ifSet($vars->use_ssl, 'true') == 'true', ['id'=>'use_ssl']);
+                        $this->Form->label($this->_('time4vps.row_meta.use_ssl', true), 'use_ssl', ['class'=>'inline']);
+                        ?>
+                    </li>
+                </ul>
+            </div>
+            <div class="button_row">
+                <?php
+                $this->Form->fieldSubmit('save', $this->_('time4vps.edit_row.add_btn', true), ['class' => 'btn btn-primary float-right']);
+                ?>
+            </div>
+            <?php
+            $this->Form->end();
+            ?>
+        </div>
+        <?php
+        $this->Widget->end();
+        ?>
+<script type="text/javascript">
+$(document).ready(function() {
+    // Add a row
+    $('.ns_row_add').click(function() {
+        var fields = $('tr.ns_row:first').clone(true);
+        $(fields).find('input').val('');
+        $('td:first span', fields).text($('tr.ns_row').length+1);
+        $('tr.ns_row:last').after(fields);
+        updateNsRows();
+        return false;
+    });
+    // Remove a row
+    $('.ns_row_remove').click(function() {
+        if ($('tr.ns_row').length > 1) {
+            $(this).closest('tr').remove();
+            // Reorder the counts for these rows
+            $i=1;
+            $('tr.ns_row').each(function() {
+                $('td:first span', this).text($i++);
+            });
+        }
+        updateNsRows();
+        return false;
+    });
+});
+
+// Zebra-stripe pricing rows
+function updateNsRows() {
+    var i = 0;
+    $('tr.ns_row').each(function() {
+        if (i++%2 == 1)
+            $(this).addClass('odd_row');
+        else
+            $(this).removeClass('odd_row');
+    });
+}
+</script>

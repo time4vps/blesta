@@ -1,0 +1,25 @@
+{
+    "version": "1.0.0",
+    "name": "time4vps.name",
+    "description": "time4vps.description",
+    "authors": [
+        {
+            "name": "Devbunch, Inc.",
+            "url": "http://www.blesta.com"
+        }
+    ],
+    "service": {
+        "name_key": "time4vps_domain"
+    },
+    "module": {
+        "row": "time4vps.module_row",
+        "rows": "time4vps.module_row_plural",
+        "row_key": "server_name"
+    },
+    "email_tags": {
+
+        "module": ["server_name", "host_name", "user_name", "password","use_ssl"],
+        "package": ["product", "init_script", "os_list","configoption4","component_map"],
+        "service": ["time4vps_management", "time4vps_reboot", "time4vps_reset_password", "time4vps_change_hostname" , "timevps_reinstall" , "time4vps_change_dns"]
+    }
+}

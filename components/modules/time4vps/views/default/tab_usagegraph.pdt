@@ -1,0 +1,21 @@
+<style>
+.alert-success{
+    display:none;
+}
+</style>
+<?php if($error){ ?>
+    <div class="alert alert-danger text-center">
+        <?php echo $error; ?>
+    </div>
+<?php } ?>
+
+<h3><?=$graph_type?> usage</h3>
+
+<?php foreach($graphs as $period=>$url){ ?>
+    <div class="row">
+        <div class="col-12 text-center">
+            <h4><?=$period?></h4>
+            <img src="<?=$url?>" alt="<?=$period?>" style="max-width: 100%;" />
+        </div>
+    </div>
+<?php }?>

@@ -1,0 +1,83 @@
+<style>
+.alert-success{
+    display:none;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<?php if($error){ ?>
+    <div class="alert alert-danger text-center">
+        <?php echo $error; ?>
+    </div>
+<?php } ?>
+
+<h3>Server Information</h3>
+<div class="text-center margin-bottom">
+    <div class="form-group">
+        <div class="block text-center">
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>value</th>
+                </tr>
+                <tr>
+                    <td>Host Name</td>
+                    <td><?=isset($service['domain'])?$service['domain']:'-'?></td>
+                </tr>
+                <tr>
+                    <td>Operating System</td>
+                    <td><?=isset($server['os'])?$server['os']:'-'?></td>
+                </tr>
+                <tr>
+                    <td>Server Ram</td>
+                    <td><?=isset($server['ram_limit'])?$server['ram_limit'].' MB':'-'?></td>
+                </tr>
+                <tr>
+                    <td>Server Disk</td>
+                    <td> <?=isset($server['disk_limit'])?'Virtual '.$server['disk_limit']/1024 .' GB':'-'?> </td>
+                </tr>
+                <tr>
+                    <td>Main IPv4</td>
+                    <td><?=isset($server['ip'])?$server['ip']:'-'?></td>
+                </tr>
+                <tr>
+                    <td>Main IPv6</td>
+                    <td><?=isset($server['additional_ip']) && isset($server['additional_ip'][count($server['additional_ip'])-1])?$server['additional_ip'][count($server['additional_ip'])-1]:'-'?></td>
+                </tr>
+                <tr>
+                    <td>Local IP</td>
+                    <td><?=isset($server['additional_ip'][0])?$server['additional_ip'][0]:'-'?></td>
+                </tr>
+                <tr>
+                    <td>Virtual CPUs</td>
+                    <td><?=isset($server['cpu_cores'])?$server['cpu_cores']:'-'?></td>
+                </tr>
+                <tr>
+                    <td>Default password</td>
+                    <td><?=isset($service['password'])?$service['password']:'-'?></td>
+                </tr>
+                <tr>
+                    <td>Current bandwidth (in GB)</td>
+                    <td><?=(isset($server['bw_in']) && isset($server['bw_out'])) ? $server['bw_in']+$server['bw_out']: '-'?></td>
+                </tr>
+                <tr>
+                    <td>Allowed bandwidth (in GB)</td>
+                    <td><?=isset($server['bw_limit'])?$server['bw_limit']:'-'?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
