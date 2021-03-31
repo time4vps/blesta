@@ -7,12 +7,12 @@
  2. Upload archive folder contents to your Blesta installation root directory;
  3. Log in to your admin Blesta account and navigate to `Settings -> Modules`;
  4. Find the Time4VPS module in "Available" tab and click the "Install" button to install it;
- 5. Click `Add Server` button'
+ 5. Click `Add Server` button;
  6. Set following fields:
-	- Name: `Time4VPS`
-	- Hostname: `billing.time4vps.com`
-	- Set your Time4VPS username and password accordingly
-	- Tick to use SSL Mode for Connections
+	- Name: `Time4VPS`;
+	- Hostname: `billing.time4vps.com`;
+	- Set your Time4VPS username and password accordingly;
+	- Tick to use `SSL Mode for Connections`.
 
 
 
