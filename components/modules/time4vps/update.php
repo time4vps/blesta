@@ -110,8 +110,6 @@ if ($time4vps_module && isset($time4vps_module->id)) {
                             "period" => isset($product['prices']['a']) && !empty($product['prices']['a']) ? "year" : "month",
                             "currency" => "USD",
                             "price" => isset($product['prices']['a']) && !empty($product['prices']['a']) ? $product['prices']['a'] : $product['prices']['m'],
-                            "price_enable_renews" => 1,
-                            "price_renews" => 50,
                             "setup_fee" => 0,
                             "cancel_fee" => 0
                         ]
