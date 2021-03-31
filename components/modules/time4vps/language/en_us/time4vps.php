@@ -5,8 +5,8 @@
  */
 
 // Basics
-$lang['time4vps.name'] = 'time4vps';
-$lang['time4vps.description'] = 'time4vps & WHM have been the industry leading web hosting platform for over 20 years. Trusted world-wide by technology partners Wordpress, CloudLinux, Lighstpeed, and more.';
+$lang['time4vps.name'] = 'Time4VPS';
+$lang['time4vps.description'] = 'Time4VPS modules allows you to resell Time4VPS servers and manage them in your Blesta instance.';
 $lang['time4vps.module_row'] = 'Server';
 $lang['time4vps.module_row_plural'] = 'Servers';
 $lang['time4vps.module_group'] = 'Server Group';
@@ -39,7 +39,7 @@ $lang['time4vps.manage.module_rows.confirm_delete'] = 'Are you sure you want to 
 $lang['time4vps.manage.module_rows_no_results'] = 'There are no servers.';
 
 // Add/Edit row
-$lang['time4vps.add_row.box_title'] = 'Add time4vps Server';
+$lang['time4vps.add_row.box_title'] = 'Add Time4VPS Server';
 $lang['time4vps.add_row.basic_title'] = 'Basic Settings';
 $lang['time4vps.add_row.add_btn'] = 'Save Server';
 $lang['time4vps.edit_row.box_title'] = 'Edit time4vps Server';
@@ -59,7 +59,7 @@ $lang['time4vps.package_fields.init'] = 'init Script';
 $lang['time4vps.package_fields.os_list'] = 'OS List';
 $lang['time4vps.package_fields.os_list_note'] = 'OS list visible to customer (each in new line)';
 $lang['package_fields.Component_map'] = 'Component Map';
-$lang['package_fields.Component_map_note'] = 'JSON formated object (WHMCS component ID = Time4vps component ID)';
+$lang['package_fields.Component_map_note'] = 'JSON formated object (Blesta component ID = Time4VPS component ID)';
 $lang['package_fields.configoption4'] = 'configoption4';
 $lang['time4vps.package_fields.configoption4_note'] = 'Placeholder for future options';
 $lang['time4vps.package_fields.advance_mode'] = 'Switch to Advance mode';
