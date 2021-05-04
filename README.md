@@ -1,5 +1,8 @@
 # Blesta Time4VPS Module
  This is Time4VPS provisioning module for Blesta platform.
+ 
+## Requirements  
+1. PHP version 7.2
 
 ## Installation  
   
