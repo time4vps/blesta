@@ -13,7 +13,7 @@
 	- Hostname: `billing.time4vps.com`;
 	- Set your Time4VPS username and password accordingly;
 	- Tick to use `SSL Mode for Connections`.
- 7. Import Time4VPS products by navigating to `http://<your blesta url>/components/modules/time4vps/update.php`;
+ 7. Import Time4VPS products if needed;
  8. Delete `/components/modules/time4vps/update.php` file from your server.
 
 
