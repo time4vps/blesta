@@ -104,7 +104,7 @@ class time4vps extends Module
         Endpoint::DebugFunction(function ($args, $request, $response) use ($debug) {
             $id = hash('crc32', microtime(true));
             $benchmark = $debug->benchmark();
-            $this->log($args[1], json_encode(array('Request' => $request,'Response' => (string) $response , 'time taken' => $benchmark), true), 'input', true);
+            $this->log($args[1], json_encode(array('Request' => $request, 'Response' => (string)$response, 'time taken' => $benchmark), true), 'input', true);
         });
     }
 
@@ -254,6 +254,7 @@ class time4vps extends Module
         $this->view->setDefaultView('components' . DS . 'modules' . DS . 'time4vps' . DS);
         return $this->view->fetch();
     }
+
     /**
      * Client Area Server Reboot
      *
@@ -281,7 +282,7 @@ class time4vps extends Module
         $last_result = null;
         $error = null;
         if (!empty($_POST['confirm'])) {
-            $error =  time4vps_Reboot($params);
+            $error = time4vps_Reboot($params);
             if ($error === 'success') {
                 time4vps_MarkServerDetailsObsolete($params);
                 return;
@@ -329,7 +330,7 @@ class time4vps extends Module
         $last_result = null;
         $error = null;
         if (!empty($post['confirm'])) {
-            $error =  time4vps_ResetPassword($params);
+            $error = time4vps_ResetPassword($params);
             if ($error === 'success') {
                 time4vps_MarkServerDetailsObsolete($params);
                 return;
@@ -630,7 +631,7 @@ class time4vps extends Module
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html']);
         $service_fields = $this->serviceFieldsToObject($service->fields);
-        if(isset($service_fields->time4vps_domain) && $service_fields->time4vps_domain == 'serverhost.name'){
+        if (isset($service_fields->time4vps_domain) && $service_fields->time4vps_domain == 'serverhost.name') {
             $row = $this->getModuleRow();
             $params = [];
             $params['serverhttpprefix'] = isset($row->meta->use_ssl) && $row->meta->use_ssl == true ? 'https' : 'http';
@@ -640,13 +641,15 @@ class time4vps extends Module
             $params['service_id'] = $service->id;
             time4vps_InitAPI($params);
             $remote_service = time4vps_GetServiceDetails($params); // remote service details
-            $service_fields->time4vps_domain = is_array($remote_service) && isset($remote_service['domain']) && !empty($remote_service['domain']) ? $remote_service['domain']: 'serverhost.name';
+            $service_fields->time4vps_domain = is_array($remote_service) && isset($remote_service['domain']) && !empty($remote_service['domain']) ? $remote_service['domain'] : 'serverhost.name';
         }
         $last_result = null;
         $error = null;
         if (!empty($post['timeout'])) {
+            $error = time4vps_EmergencyConsole($params, $post['timeout']);
             if ($error === 'success') {
                 time4vps_MarkServerDetailsObsolete($params);
+                return;
             }
         }
         try {
@@ -682,7 +685,7 @@ class time4vps extends Module
         // Load the helpers required for this view
         Loader::loadHelpers($this, ['Form', 'Html']);
         $service_fields = $this->serviceFieldsToObject($service->fields);
-        if(isset($service_fields->time4vps_domain) && $service_fields->time4vps_domain == 'serverhost.name'){
+        if (isset($service_fields->time4vps_domain) && $service_fields->time4vps_domain == 'serverhost.name') {
             $row = $this->getModuleRow();
             $params = [];
             $params['serverhttpprefix'] = isset($row->meta->use_ssl) && $row->meta->use_ssl == true ? 'https' : 'http';
@@ -692,7 +695,7 @@ class time4vps extends Module
             $params['service_id'] = $service->id;
             time4vps_InitAPI($params);
             $remote_service = time4vps_GetServiceDetails($params); // remote service details
-            $service_fields->time4vps_domain = is_array($remote_service) && isset($remote_service['domain']) && !empty($remote_service['domain']) ? $remote_service['domain']: 'serverhost.name';
+            $service_fields->time4vps_domain = is_array($remote_service) && isset($remote_service['domain']) && !empty($remote_service['domain']) ? $remote_service['domain'] : 'serverhost.name';
         }
         // Perform the password reset
         if (!empty($post)) {
@@ -885,8 +888,8 @@ class time4vps extends Module
             $params['serverusername'] = isset($response->meta) ? $response->meta->user_name : $response->user_name;
             $params['serverpassword'] = isset($response->meta->password) ? $response->meta->password : $response->password;
             $params['serveraccesshash'] = isset($response->meta->access_hash) ? $response->meta->access_hash : $response->access_hash;
-            $params['serversecure'] = ((isset($response->meta->use_ssl) && $response->meta->use_ssl == true) || (isset($response->use_ssl) && $response->use_ssl == true) ) ? '1' : '0';
-            $params['serverhttpprefix'] = ((isset($response->meta->use_ssl) && $response->meta->use_ssl == true) || (isset($response->use_ssl) && $response->use_ssl == true) ) ? 'https' : 'http';
+            $params['serversecure'] = ((isset($response->meta->use_ssl) && $response->meta->use_ssl == true) || (isset($response->use_ssl) && $response->use_ssl == true)) ? '1' : '0';
+            $params['serverhttpprefix'] = ((isset($response->meta->use_ssl) && $response->meta->use_ssl == true) || (isset($response->use_ssl) && $response->use_ssl == true)) ? 'https' : 'http';
             $available_products = $available_products + $this->time4vps_ProductLoaderFunction($params); //Append products to existing Array
             $available_scripts = $available_scripts + $this->time4vps_InitScriptLoaderFunction($params); // Append init scripts to existing Array
         }
@@ -952,7 +955,7 @@ class time4vps extends Module
         $configoption4_note = $fields->label(
             Language::_('time4vps.package_fields.configoption4_note', true),
             'time4vps_configoption4_note',
-            array( 'id' => "time4vps_configoption4_note")
+            array('id' => "time4vps_configoption4_note")
         );
         $fields->setField($configoption4_note);
 
@@ -973,19 +976,19 @@ class time4vps extends Module
         $Component_map_note = $fields->label(
             Language::_('time4vps.package_fields.Component_map_note', true),
             'time4vps_Component_map_note',
-            array( 'id' => "time4vps_Component_map_note")
+            array('id' => "time4vps_Component_map_note")
         );
         $fields->setField($Component_map_note);
         //Advance mode link
         $advance_mode = $fields->label(
             Language::_('time4vps.package_fields.advance_mode', true),
             'time4vps_advance_mode',
-            array( 'id' => "time4vps_advance_mode" , 'style' => "text-decoration: underline;")
+            array('id' => "time4vps_advance_mode", 'style' => "text-decoration: underline;")
         );
         $normal_mode = $fields->label(
             Language::_('time4vps.package_fields.normal_mode', true),
             'time4vps_normal_mode',
-            array( 'id' => "time4vps_normal_mode" , 'style' => "text-decoration: underline; display:none;")
+            array('id' => "time4vps_normal_mode", 'style' => "text-decoration: underline; display:none;")
         );
         $fields->setField($advance_mode);
         $fields->setField($normal_mode);
@@ -1117,8 +1120,8 @@ class time4vps extends Module
                 $vars = [
                     "names" => [
                         [
-                        "lang" => 'en_us',
-                        "name" => $product['name']
+                            "lang" => 'en_us',
+                            "name" => $product['name']
                         ]
                     ],
                     "descriptions" => [
@@ -1166,8 +1169,8 @@ class time4vps extends Module
                     "groups" => [],
                     "group_names" => [
                         [
-                         "lang" => "en_us",
-                         "name" => ""
+                            "lang" => "en_us",
+                            "name" => ""
                         ]
                     ],
                     "save" => "Create Package",
@@ -1262,7 +1265,7 @@ class time4vps extends Module
         $params['serverpassword'] = $vars['password'];
         $response = $this->time4vps_TestConnection($params);
         if ($response['success']) {
-            $meta_fields = ['server_name', 'host_name', 'user_name', 'password', 'access_hash','use_ssl'];
+            $meta_fields = ['server_name', 'host_name', 'user_name', 'password', 'access_hash', 'use_ssl'];
             $encrypted_fields = ['password'];
 
             // Set unspecified checkboxes
@@ -1306,7 +1309,7 @@ class time4vps extends Module
      */
     public function editModuleRow($module_row, array &$vars)
     {
-        $meta_fields = ['server_name', 'host_name', 'user_name', 'password', 'access_hash','use_ssl'];
+        $meta_fields = ['server_name', 'host_name', 'user_name', 'password', 'access_hash', 'use_ssl'];
         $encrypted_fields = ['password'];
 
         // Set unspecified checkboxes
@@ -1376,7 +1379,7 @@ class time4vps extends Module
             $params['service_id'] = $service->id;
             time4vps_InitAPI($params);
             $remote_service = time4vps_GetServiceDetails($params); // service details
-            $service_name = is_array($remote_service) && isset($remote_service['domain']) && !empty($remote_service['domain']) ? $remote_service['domain']: 'serverhost.name';
+            $service_name = is_array($remote_service) && isset($remote_service['domain']) && !empty($remote_service['domain']) ? $remote_service['domain'] : 'serverhost.name';
         } else {
             $service_name = 'serverhost.name';
         }
@@ -1764,7 +1767,7 @@ class time4vps extends Module
         $vars['time4vps_billing_cycle'] = $package->pricing[0]->period;
         // Generate username/password
         if (array_key_exists('time4vps_domain', $vars)) {
-            Loader::loadModels($this, ['Clients','Packages']);
+            Loader::loadModels($this, ['Clients', 'Packages']);
 
             // Strip "www." from beginning of domain if present
 
@@ -1993,7 +1996,7 @@ class time4vps extends Module
             $params['serverhostname'] = $row->meta->host_name;
             $params['serverusername'] = $row->meta->user_name;
             $params['serverpassword'] = $row->meta->password;
-            $params = array('accountid' => $service->id_value, 'serviceid' => $service->id,'userid' => $service->client_id, 'domain' => $service_fields->time4vps_domain, 'username' => $service_fields->time4vps_username, 'password' => $service_fields->time4vps_password, 'packageid' => $service->package->id, 'status' => $service->package->status, 'type' =>  'server', 'producttype' => 'server', 'moduletype' => 'time4vps', 'configoption3' => $service->package->meta->os_list);
+            $params = array('accountid' => $service->id_value, 'serviceid' => $service->id, 'userid' => $service->client_id, 'domain' => $service_fields->time4vps_domain, 'username' => $service_fields->time4vps_username, 'password' => $service_fields->time4vps_password, 'packageid' => $service->package->id, 'status' => $service->package->status, 'type' => 'server', 'producttype' => 'server', 'moduletype' => 'time4vps', 'configoption3' => $service->package->meta->os_list);
             return time4vps_TerminateAccount($params);
         }
         return null;
