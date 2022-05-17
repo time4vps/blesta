@@ -18,7 +18,7 @@
 
     <?php if ($last_result['completed']) { ?>
         <p>Your last emergency console was launched at <strong><?php echo date('d/M/Y h:i:s', strtotime($last_result['completed'])) ?></strong>:</p>
-        <pre><?php echo $last_result['results']; ?></pre>
+        <pre><strong><?php echo $last_result['results']; ?></strong></pre>
         <hr />
     <?php } ?>
 
